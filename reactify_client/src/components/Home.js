@@ -20,7 +20,6 @@ class Home extends Component {
   componentDidMount() {
       return fetch('http://localhost:8888/').then(response => {
           response.text().then(token => {
-              console.log(token)
               this.setState({
                   token: token
               });
@@ -63,6 +62,7 @@ class Home extends Component {
   showAlbum() {
       if(this.state.album !== null) {
           let displayAlbum = this.state.album;
+          let i = 0;
           return(
               <div>
                   <div className="album-info">
@@ -73,7 +73,7 @@ class Home extends Component {
                   <ul className="album-tracks">
                       {displayAlbum.tracks.map(track => {
                           return (
-                            <li>
+                            <li key={++i}>
                                 <span>{track.name}</span>
                                 <span>
                                     <audio controls>
