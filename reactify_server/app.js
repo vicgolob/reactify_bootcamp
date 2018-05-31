@@ -66,5 +66,5 @@ console.log('\nMake sure you have set \'reactify_client_id\' and \'reactify_clie
 if(client_id == undefined || client_secret == undefined) {
     console.log('>> Oops your credentials are not properly set');
 } else {
-    console.log('>> You\'re set to go. Type into your browser \'http://localhost:8888\'');
+    console.log('>> You\'re set to go. Now you can run Reactify Client');
 }
