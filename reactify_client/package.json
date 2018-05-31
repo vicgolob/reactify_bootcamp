@@ -1,5 +1,6 @@
 {
-  "name": "reactify",
+  "author": "Victor Golob",
+  "name": "reactify-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
