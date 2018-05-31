@@ -7,12 +7,22 @@
  * https://developer.spotify.com/web-api/authorization-guide/#client_credentials_flow
  */
 var express = require('express'); // Express web server framework
+var app = express();
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
 
-var app = express();
+
 var client_id = process.env.reactify_client_id;// Your client id
 var client_secret = process.env.reactify_client_secret;// Your secret
+
+var cors = require('cors');
+var corsOptions = {
+  origin: '*',
+  allowedHeaders : 'Origin, X-Requested-With, Content-Type, Accept',
+  methods: 'GET'
+}
+// Middleware to apply before any request
+app.use(cors(corsOptions));
 
 // your application requests authorization
 var authOptions = {
@@ -34,12 +44,13 @@ app.get('/', function(req, res) {
       var access_token = body.access_token;
       console.log('\nHere\'s your access token:: ' + access_token + '\n');
       // we pass the token to the browser to make requests from there
-      res.redirect('http://localhost:3000/?' +
+      response = 'reactify?' +
         querystring.stringify({
           access_token: access_token
-        }));
+      });
+      res.send(response);
       } else {
-      res.redirect('http://localhost:3000/?' +
+      res.send('reactify?' +
         querystring.stringify({
           error: 'invalid_token'
         }));
