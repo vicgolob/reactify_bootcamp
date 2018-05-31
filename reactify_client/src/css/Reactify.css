@@ -1,0 +1,26 @@
+.album-info,
+.album-tracks {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.album-info {
+    font-family: sans-serif;
+}
+
+.album-tracks {
+    list-style: none;
+}
+
+.album-tracks li {
+    margin-bottom: 15px;
+}
+
+.album-tracks span {
+    font-size: 22px;
+    word-spacing: 5px;
+}
+
+.album-tracks li > span {
+    margin-right: 10px;
+}

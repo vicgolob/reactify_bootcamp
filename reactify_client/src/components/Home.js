@@ -1,17 +1,29 @@
 import React, { Component } from 'react';
 
+import Reactify from './Reactify';
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.loginAction = this.loginAction.bind(this);
+    this.state = {
+        token : null
+    }
   }
 
   loginAction() {
       return fetch('http://localhost:8888/').then(response => {
-          response.text().then(queryParams => {
-              this.props.history.push(`/${queryParams}`);
+          response.text().then(token => {
+              this.setState({
+                  token: token
+              });
           });
+          this.props.history.push("/reactify")
       }).catch(e => {alert(`${e} - Server is not running`)});
+  }
+
+  componentDidMount() {
+      this.loginAction();
   }
 
   render() {
@@ -22,7 +34,8 @@ class App extends Component {
           <br></br>
           Make sure you run Reactify-Server first and then click button below.
           </p>
-          <button onClick={this.loginAction}>Log In</button>
+
+          <Reactify token={this.state.token}/>
       </div>
     );
   }

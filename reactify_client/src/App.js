@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Reactify from './components/Reactify';
 
 import './App.css';
+import './css/Reactify.css';
 
 class App extends Component {
 

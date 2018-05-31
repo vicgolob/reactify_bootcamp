@@ -44,16 +44,9 @@ app.get('/', function(req, res) {
       var access_token = body.access_token;
       console.log('\nHere\'s your access token:: ' + access_token + '\n');
       // we pass the token to the browser to make requests from there
-      response = 'reactify?' +
-        querystring.stringify({
-          access_token: access_token
-      });
-      res.send(response);
+      res.send(access_token);
       } else {
-      res.send('reactify?' +
-        querystring.stringify({
-          error: 'invalid_token'
-        }));
+      res.send('invalid_token');
       }
   });
 });
