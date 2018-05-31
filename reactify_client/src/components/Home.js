@@ -8,9 +8,8 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
-    this.loginAction();
     this.state = {
-        token : props.token,
+        token : null,
         album : null
     };
 
@@ -18,17 +17,20 @@ class Home extends Component {
     this.showAlbum = this.showAlbum.bind(this);
   }
 
-  loginAction() {
+  componentDidMount() {
       return fetch('http://localhost:8888/').then(response => {
           response.text().then(token => {
+              console.log(token)
               this.setState({
                   token: token
               });
+              this.getAlbum();
           });
       }).catch(e => {alert(`${e} - Server is not running`)});
+
   }
 
-  componentDidMount() {
+  getAlbum() {
       // init SpotifyWebApi
       if((this.state.token !== null) &&
         SpotifyWebApi.initApi(this.state.token)
@@ -51,6 +53,7 @@ class Home extends Component {
                 };
             });
       this.setState({
+          token: this.state.token,
           album : {
               artists, albumTitle, cover, tracks
           }
