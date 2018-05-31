@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import Home from './components/Home';
-import Reactify from './components/Reactify';
 
 import './App.css';
-import './css/Reactify.css';
+import './css/Home.css';
 
 class App extends Component {
 
@@ -13,8 +12,7 @@ class App extends Component {
     return (
       <Router className="App">
           <div>
-              <Route exact path="/" component={Home}/>
-              <Route path="/reactify" component={Reactify}/>
+              <Route path="/" component={Home}/>
           </div>
       </Router>
     );

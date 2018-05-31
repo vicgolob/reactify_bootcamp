@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 
-import Reactify from './Reactify';
+import SpotifyWebApi from './../helpers/SpotifyWebApi';
 
-class App extends Component {
+import '../css/Home.css';
+
+class Home extends Component {
   constructor(props) {
     super(props);
-    this.loginAction = this.loginAction.bind(this);
+
+    this.loginAction();
     this.state = {
-        token : null
-    }
+        token : props.token,
+        album : null
+    };
+
+    this.processAlbum = this.processAlbum.bind(this);
+    this.showAlbum = this.showAlbum.bind(this);
   }
 
   loginAction() {
@@ -18,27 +25,77 @@ class App extends Component {
                   token: token
               });
           });
-          this.props.history.push("/reactify")
       }).catch(e => {alert(`${e} - Server is not running`)});
   }
 
   componentDidMount() {
-      this.loginAction();
+      // init SpotifyWebApi
+      if((this.state.token !== null) &&
+        SpotifyWebApi.initApi(this.state.token)
+        ) {
+          SpotifyWebApi.getAlbum('2Pqkn9Dq2DFtdfkKAeqgMd')
+            .then(data => {
+                this.processAlbum(data);
+            });
+      }
+  }
+
+  processAlbum(albumData) {
+      let   artists = albumData.artists[0].name,
+            albumTitle = albumData.name,
+            cover = albumData.images[1].url,
+            tracks = albumData.tracks.items.map(track => {
+                return {
+                    name : track.name,
+                    preview: track.preview_url
+                };
+            });
+      this.setState({
+          album : {
+              artists, albumTitle, cover, tracks
+          }
+      });
+  }
+
+  showAlbum() {
+      if(this.state.album !== null) {
+          let displayAlbum = this.state.album;
+          return(
+              <div>
+                  <div className="album-info">
+                      <h2>{displayAlbum.albumTitle}</h2>
+                      <h3>{displayAlbum.artists}</h3>
+                      <img src={displayAlbum.cover} alt="" />
+                  </div>
+                  <ul className="album-tracks">
+                      {displayAlbum.tracks.map(track => {
+                          return (
+                            <li>
+                                <span>{track.name}</span>
+                                <span>
+                                    <audio controls>
+                                      <source src={track.preview} type="audio/mpeg" />
+                                    </audio>
+                                </span>
+                            </li>
+                        )
+                      })}
+                  </ul>
+              </div>
+          );
+      } else {
+          return(<p>No hay Album</p>);
+      }
   }
 
   render() {
     return (
       <div>
           <h2>Home Page</h2>
-          <p>You're not Authenticated.
-          <br></br>
-          Make sure you run Reactify-Server first and then click button below.
-          </p>
-
-          <Reactify token={this.state.token}/>
+          {this.showAlbum()}
       </div>
     );
   }
 }
 
-export default App;
+export default Home;
