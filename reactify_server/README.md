@@ -14,5 +14,5 @@ $ npm install
 $ node app.js
 ```
 
-* Last step will create a Node process to get Spotify's access token. Go to http://localhost:8888/ and if OK, you'll get redirected to http://localhost:3000/.
+* Last step will create a Node process to get Spotify's access token. You can now start Reactify Client app.
 * Important note: set the following environment vars in your system: **reactify_client_id** & **reactify_client_secret**.

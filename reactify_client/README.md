@@ -14,4 +14,4 @@ $ npm install
 $ npm start
 ```
 
-* Last step will serve the app right at your browser. Make sure to run Reactify Server first in order to obtain the access token.
+* Last step will serve the app right at your browser. Make sure to run Reactify Server first in order to obtain the access token. Once in http://localhost:3000/ you click the button and if OK, you'll get redirected to http://localhost:3000/reactify with your access granted.
