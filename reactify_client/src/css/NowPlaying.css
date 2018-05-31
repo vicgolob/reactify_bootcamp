@@ -1,0 +1,12 @@
+.playing-container {
+    grid-area: main;
+}
+
+#playing-cover {
+    width: 30%;
+}
+
+#playing-cover.blur {
+    -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
+    filter: blur(5px);
+}
