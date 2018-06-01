@@ -34,7 +34,7 @@ class Home extends Component {
       if((this.state.token !== null) &&
         SpotifyWebApi.initApi(this.state.token)
         ) {
-          SpotifyWebApi.getAlbum('2Pqkn9Dq2DFtdfkKAeqgMd')
+          SpotifyWebApi.getAlbum('69Wr9DvWfIJRTi5NUGeVTn')
             .then(data => {
                 this.processAlbum(data);
             });
@@ -64,7 +64,7 @@ class Home extends Component {
           let displayAlbum = this.state.album;
           let i = 0;
           return(
-              <div>
+              <div className="album-container">
                   <div className="album-info">
                       <h2>{displayAlbum.albumTitle}</h2>
                       <h3>{displayAlbum.artists}</h3>
