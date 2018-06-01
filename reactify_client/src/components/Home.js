@@ -2,31 +2,28 @@ import React, { Component } from 'react';
 
 import Authorization from './../helpers/Authorization';
 import SpotifyWebApi from './../helpers/SpotifyWebApi';
+import List from './List';
 
 import '../css/Home.css';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-        token : null,
-        album : null
-    };
-
-    this.processAlbum = this.processAlbum.bind(this);
-    this.showAlbum = this.showAlbum.bind(this);
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            token : null,
+            album : null
+        };
+    }
 
   componentDidMount() {
-      var self = this;
+      let me = this;
       // get the token and show the new album
       new Authorization().then(response => {
-          self.setState({
+          me.setState({
               token: response
           });
-          if (!!self.state.token) {
-              self.getAlbum();
+          if (!!me.state.token) {
+              me.getAlbum();
           } else {
               new Error("ooops, looks that we are missing the token dude.");
           }
@@ -48,7 +45,7 @@ class Home extends Component {
             tracks = albumData.tracks.items.map(track => {
                 return {
                     name : track.name,
-                    preview: track.external_urls.spotify
+                    preview: track.preview_url
                 };
             });
       this.setState({
@@ -56,7 +53,6 @@ class Home extends Component {
               artists, albumTitle, cover, tracks
           }
       });
-      debugger;
   }
 
   showAlbum() {
@@ -64,27 +60,7 @@ class Home extends Component {
             let displayAlbum = this.state.album,
                 i = 0;
                 return(
-                    <div className="album-container">
-                      <div className="album-info">
-                          <h2>{displayAlbum.albumTitle}</h2>
-                          <h3>{displayAlbum.artists}</h3>
-                          <img src={displayAlbum.cover} alt="" />
-                      </div>
-                      <ul className="album-tracks">
-                          {displayAlbum.tracks.map(track => {
-                              return (
-                                <li key={++i}>
-                                    <span>{track.name}</span>
-                                    <span>
-                                        <audio controls>
-                                          <source src={track.preview} type="audio/mpeg" />
-                                        </audio>
-                                    </span>
-                                </li>
-                            )
-                          })}
-                      </ul>
-                    </div>
+                    <List itemsAlbum={displayAlbum} ejemplo={"esto es un ejemplo"}/>
                 );
       } else {
           return (<p>No hay Album</p>);
