@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Authorization from './../helpers/Authorization';
 import SpotifyWebApi from './../helpers/SpotifyWebApi';
 
 import '../css/Home.css';
@@ -18,14 +19,12 @@ class Home extends Component {
   }
 
   componentDidMount() {
-      return fetch('http://localhost:8888/').then(response => {
-          response.text().then(token => {
-              this.setState({
-                  token: token
-              });
-              this.getAlbum();
+      return Authorization.getToken().then(gotToken => {
+          this.setState({
+              token: gotToken
           });
-      }).catch(e => {alert(`${e} - Server is not running`)});
+          this.getAlbum();
+      });
 
   }
 
