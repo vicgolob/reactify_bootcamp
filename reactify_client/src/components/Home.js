@@ -19,25 +19,26 @@ class Home extends Component {
   }
 
   componentDidMount() {
-      return Authorization.getToken().then(gotToken => {
-          this.setState({
-              token: gotToken
+      var self = this;
+      // get the token and show the new album
+      new Authorization().then(response => {
+          self.setState({
+              token: response
           });
-          this.getAlbum();
+          if (!!self.state.token) {
+              self.getAlbum();
+          } else {
+              new Error("ooops, looks that we are missing the token dude.");
+          }
       });
-
   }
 
   getAlbum() {
       // init SpotifyWebApi
-      if((this.state.token !== null) &&
-        SpotifyWebApi.initApi(this.state.token)
-        ) {
-          SpotifyWebApi.getAlbum('69Wr9DvWfIJRTi5NUGeVTn')
-            .then(data => {
-                this.processAlbum(data);
-            });
-      }
+    let spotifyApi = new SpotifyWebApi(this.state.token);
+    spotifyApi.getAlbum('7ihXTrwWuwFTKqpca7D9dr').then(data => {
+        this.processAlbum(data);
+    });
   }
 
   processAlbum(albumData) {
@@ -47,46 +48,46 @@ class Home extends Component {
             tracks = albumData.tracks.items.map(track => {
                 return {
                     name : track.name,
-                    preview: track.preview_url
+                    preview: track.external_urls.spotify
                 };
             });
       this.setState({
-          token: this.state.token,
           album : {
               artists, albumTitle, cover, tracks
           }
       });
+      debugger;
   }
 
   showAlbum() {
-      if(this.state.album !== null) {
-          let displayAlbum = this.state.album;
-          let i = 0;
-          return(
-              <div className="album-container">
-                  <div className="album-info">
-                      <h2>{displayAlbum.albumTitle}</h2>
-                      <h3>{displayAlbum.artists}</h3>
-                      <img src={displayAlbum.cover} alt="" />
-                  </div>
-                  <ul className="album-tracks">
-                      {displayAlbum.tracks.map(track => {
-                          return (
-                            <li key={++i}>
-                                <span>{track.name}</span>
-                                <span>
-                                    <audio controls>
-                                      <source src={track.preview} type="audio/mpeg" />
-                                    </audio>
-                                </span>
-                            </li>
-                        )
-                      })}
-                  </ul>
-              </div>
-          );
+        if (!!this.state.album) {
+            let displayAlbum = this.state.album,
+                i = 0;
+                return(
+                    <div className="album-container">
+                      <div className="album-info">
+                          <h2>{displayAlbum.albumTitle}</h2>
+                          <h3>{displayAlbum.artists}</h3>
+                          <img src={displayAlbum.cover} alt="" />
+                      </div>
+                      <ul className="album-tracks">
+                          {displayAlbum.tracks.map(track => {
+                              return (
+                                <li key={++i}>
+                                    <span>{track.name}</span>
+                                    <span>
+                                        <audio controls>
+                                          <source src={track.preview} type="audio/mpeg" />
+                                        </audio>
+                                    </span>
+                                </li>
+                            )
+                          })}
+                      </ul>
+                    </div>
+                );
       } else {
-          return(<p>No hay Album</p>);
+          return (<p>No hay Album</p>);
       }
   }
 
