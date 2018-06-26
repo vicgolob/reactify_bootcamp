@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 
 import Authorization from './../helpers/Authorization';
 import SpotifyWebApi from './../helpers/SpotifyWebApi';
-import List from './List';
 
-import '../css/Home.css';
+import Header from './Header';
+import SearchBar from './SearchBar';
+import Favorite from './Favorite';
+
+import '../index.css';
 
 class Home extends Component {
     constructor(props) {
@@ -13,68 +16,31 @@ class Home extends Component {
             token : null,
             album : null
         };
+        let spotifyApi = null;
     }
 
-  componentDidMount() {
-      let me = this;
-      // get the token and show the new album
-      new Authorization().then(response => {
-          me.setState({
-              token: response
-          });
-          if (!!me.state.token) {
-              me.getAlbum();
-          } else {
-              new Error("ooops, looks that we are missing the token dude.");
-          }
-      });
-  }
+    componentDidMount() {
+        // get the token and show the new album
+        new Authorization().then(token => {
+            // init SpotifyWebApi
+            this.spotifyApi = new SpotifyWebApi(token);
+        });
+    }
 
-  getAlbum() {
-      // init SpotifyWebApi
-    let spotifyApi = new SpotifyWebApi(this.state.token);
-    spotifyApi.getAlbum('7ihXTrwWuwFTKqpca7D9dr').then(data => {
-        this.processAlbum(data);
-    });
-  }
-
-  processAlbum(albumData) {
-      let   artists = albumData.artists[0].name,
-            albumTitle = albumData.name,
-            cover = albumData.images[1].url,
-            tracks = albumData.tracks.items.map(track => {
-                return {
-                    name : track.name,
-                    preview: track.preview_url
-                };
-            });
-      this.setState({
-          album : {
-              artists, albumTitle, cover, tracks
-          }
-      });
-  }
-
-  showAlbum() {
-        if (!!this.state.album) {
-            let displayAlbum = this.state.album,
-                i = 0;
-                return(
-                    <List itemsAlbum={displayAlbum} ejemplo={"esto es un ejemplo"}/>
-                );
-      } else {
-          return (<p>No hay Album</p>);
-      }
-  }
-
-  render() {
-    return (
-      <div>
-          <h2>Home Page</h2>
-          {this.showAlbum()}
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="page-container">
+                <div className="page-content">
+                    <Header positionTo='center' />
+                    <h3>Welcome to</h3>
+                    <h1>Reactify</h1>
+                    <p>Search your favourite songs over Spotify, just enter an artist's name in the following search box and enjoy!</p>
+                    <SearchBar />
+                    <Favorite />
+                </div>
+            </div>
+        );
+    }
 }
 
 export default Home;

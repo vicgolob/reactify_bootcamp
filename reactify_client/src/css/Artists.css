@@ -1,0 +1,45 @@
+.artist-container {
+    display: inline-block;
+    width: 30%;
+    height: 300px;
+    text-align: center;
+    padding: 5px;
+    background-color: #f0e68c;
+    margin-right: 28px;
+    margin-bottom: 8px;
+    vertical-align: top;
+}
+
+.artist-cover {
+    width: 100%;
+    height: 90%;
+    object-fit: cover;
+}
+
+.artist-container p {
+    margin: 5px 0px 5px 0;
+}
+
+@media only screen and (max-width: 600px) {
+    .artist-container {
+        width: 46%;
+        height: 220px;
+        margin-right: 5px;
+    }
+
+    .artist-container:nth-child(2n) {
+        margin-right: 0;
+    }
+
+    .artists-container svg {
+        width: 100%;
+        height: 90%;
+        object-fit: cover;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .artist-container:nth-child(3n) {
+        margin-right: 0;
+    }
+}

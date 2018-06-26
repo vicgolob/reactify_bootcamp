@@ -1,12 +1,12 @@
 {
-  "author": "Victor Golob",
-  "name": "reactify-server",
-  "description": "Basic examples of the Spotify authorization flows through OAuth 2",
-  "version": "0.5.0",
-  "dependencies": {
-    "cors": "^2.8.4",
-    "express": "~4.16.0",
-    "querystring": "~0.2.0",
-    "request": "~2.83.0"
-  }
+    "author": "Victor Golob",
+    "name": "reactify-server",
+    "description": "Basic examples of the Spotify authorization flows through OAuth 2",
+    "version": "1.0.0",
+    "dependencies": {
+        "cors": "^2.8.4",
+        "express": "~4.16.0",
+        "querystring": "~0.2.0",
+        "request": "~2.83.0"
+    }
 }

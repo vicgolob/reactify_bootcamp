@@ -1,0 +1,17 @@
+table {
+    marginTop: 40px;
+}
+
+td img {
+    height: 150px;
+    width: 150px;
+}
+
+td:nth-child(2) {
+    padding-left: 10px;
+}
+
+td p {
+    line-height: 15px;
+    font-size: 15px;
+}

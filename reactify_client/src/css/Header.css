@@ -1,0 +1,24 @@
+.header {
+    margin-bottom: 15px;
+}
+
+.header-logo-center {
+    text-align: center;
+}
+
+.header-logo-left {
+    text-align: left;
+    display: inline-block;
+}
+
+.header a svg {
+    width: 70px;
+    height: 70px;
+}
+
+@media only screen and (max-width: 600px) {
+    .header a svg {
+        width: 40px;
+        height: 40px;
+    }
+}

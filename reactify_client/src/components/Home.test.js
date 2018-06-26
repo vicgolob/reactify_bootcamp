@@ -32,6 +32,6 @@ describe('Testing home component', function() {
         let result = component.showAlbum();
 
         //Then
-        expect(result.props.children).toBe('No hay Album');
+        expect(result.props.children).toBe('No hay Albums');
     });
 });

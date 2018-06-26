@@ -1,0 +1,33 @@
+.searchbar {
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.searchbar input[type="text"] {
+    border: 0;
+    margin-left: 10px;
+}
+
+.in-header {
+    display: inline-block;
+    float: right;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+input:focus {
+    outline: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .searchbar {
+        max-width: 97%;
+    }
+
+    .searchbar input[type="text"] {
+        max-width: 275px;
+    }
+}

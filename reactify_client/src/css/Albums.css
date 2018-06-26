@@ -1,0 +1,82 @@
+.albums-header {
+    margin-bottom: 30px;
+}
+
+.albums-header img {
+    height: 200px;
+    width: 200px;
+}
+
+.albums-header svg {
+    height: 200px;
+    width: 200px;
+}
+
+.albums-header span {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+}
+
+.album-container {
+    background-color: #f0e68c;
+    padding: 5px;
+    display: inline-block;
+    width: 23%;
+    height: 300px;
+    text-align: center;
+    vertical-align: top;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.album-container:nth-child(4n) {
+    margin-right: 0;
+}
+
+.album-cover {
+    width: 100%;
+}
+
+.album-container p {
+    margin: 5px 0px 20px 0;
+}
+
+@media only screen and (max-width: 600px) {
+    .albums-header img {
+        width: 100px;
+    }
+
+    .albums-header svg {
+        width: 100px;
+    }
+
+    .albums-header span {
+        width: 65%;
+    }
+
+    .album-container {
+        display: flex;
+        flex-direction: row;
+        height: 150px;
+        width: 100%;
+        padding: 0;
+    }
+
+    .album-container img {
+        height: 150px;
+        width: 150px;
+        margin-right: 10px;
+    }
+
+    .album-container svg {
+        width: 100%;
+        height: 90%;
+        object-fit: cover;
+    }
+
+    .album-container span {
+        text-align: left;
+        width: 170px;
+    }
+}
