@@ -12,8 +12,8 @@ var request = require('request'); // "Request" library
 var querystring = require('querystring');
 
 
-var client_id = process.env.reactify_client_id;// Your client id
-var client_secret = process.env.reactify_client_secret;// Your client secret
+var client_id = '88a2d1fcdae14802ab0ddb8253dca01c';//process.env.reactify_client_id;// Your client id
+var client_secret = '76ce706a3e7e4e40aaebfd1c0afb0b18';//process.env.reactify_client_secret;// Your client secret
 
 var cors = require('cors');
 var corsOptions = {
