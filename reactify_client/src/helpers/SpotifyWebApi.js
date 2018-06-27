@@ -1,12 +1,23 @@
+import Authorization from './Authorization';
+
 let _baseUri = 'https://api.spotify.com/v1',
 instance = null;
 
 class SpotifyWebApi {
     _accessToken;
-    constructor(token = null) {
+    constructor(token = null, expiration = null) {
+        this.authorization = new Authorization();
+
         if (!instance) {
             this._accessToken = token;
             instance = this;
+
+            setInterval(() => {
+                this.authorization.getToken().then(accessObject => {
+                    // refresh token
+                    this._accessToken = accessObject.access_token;
+                });
+            }, expiration*1000);
         }
         return instance;
     }

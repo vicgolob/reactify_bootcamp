@@ -31,8 +31,8 @@ class SearchBar extends Component {
                 id : result.id,
                 name : result.name,
                 cover : (result.images.length)
-                ? result.images[1].url
-                : null
+                    ? result.images[1].url
+                    : null
             };
         });
 
@@ -43,13 +43,9 @@ class SearchBar extends Component {
 
     render() {
         let placeholder = (this.props.defaultText === undefined)
-        ? 'Type the name of your favourite artist'
-        : this.props.defaultText;
+            ? 'Type the name of your favourite artist'
+            : this.props.defaultText;
         if(this.state.redirect) {
-            // To prevent missing the actual component after redirect
-            this.setState({
-                redirect : false
-            });
             return <Redirect
                 to={{
                     pathname: '/artists',

@@ -1,8 +1,8 @@
 
 class Authorization {
-    constructor() {
+    getToken() {
         return fetch('http://localhost:8888/').then(response => {
-            return response.text();
+            return response.json();
         }).catch(e => {alert(`${e} - Server is not running`)});
     }
 }

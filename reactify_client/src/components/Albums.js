@@ -14,9 +14,7 @@ class Albums extends Component {
     constructor() {
         super();
         this.selectedAlbum = null;
-        this.state = {
-            redirect : false
-        };
+        this.state = {redirect : false};
     }
 
     selectAlbum(idAlbum, e) {

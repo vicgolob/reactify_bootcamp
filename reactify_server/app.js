@@ -40,10 +40,11 @@ app.get('/', function(req, res) {
     request.post(authOptions, function(error, response, body) {
         if (!error && response.statusCode === 200) {
             // use the access token to access the Spotify Web API
-            var access_token = body.access_token;
+            let expiration = body.expires_in,
+                access_token = body.access_token;
             console.log('\nHere\'s your access token:: ' + access_token + '\n');
             // we pass the token to the browser to make requests from there
-            res.send(access_token);
+            res.send({access_token, expiration});
         } else {
             res.send('invalid_token');
         }

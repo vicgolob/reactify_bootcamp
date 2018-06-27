@@ -13,18 +13,18 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            token : null,
-            album : null
+            token : null
         };
-        let spotifyApi = null;
+        this.authorization = new Authorization();
     }
 
     componentDidMount() {
         // get the token and show the new album
-        new Authorization().then(token => {
+        this.authorization.getToken().then(accessObject => {
             // init SpotifyWebApi
-            this.spotifyApi = new SpotifyWebApi(token);
+            new SpotifyWebApi(accessObject.access_token, accessObject.expiration);
         });
+
     }
 
     render() {

@@ -74,10 +74,11 @@ class Artists extends Component {
             return <Redirect
                 to={{
                     pathname: '/albums',
-                    state: { selectedArtist: this.selectedArtist, albums : this.selectedArtistAlbums}
+                    state: {selectedArtist: this.selectedArtist, albums : this.selectedArtistAlbums}
                 }}
             />;
         }
+
         return (
             <div className="page-container">
                 <div className="page-content">

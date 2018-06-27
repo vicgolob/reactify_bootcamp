@@ -20,27 +20,29 @@ class Favorite extends Component {
             <React.Fragment>
                 <h3>Favorite songs</h3>
                 <table>
-                    {favorites.map(song => {
-                        return (
-                            <tr>
-                                <td>
-                                    <img src={song.cover} alt="" />
-                                </td>
-                                <td>
-                                    <p><b>{song.name}</b></p>
-                                    <p>Artist: {song.artist}</p>
-                                    <p>Album: {song.title}</p>
-                                    <PlayController
-                                        options={{
-                                            id: song.id,
-                                            preview: song.preview,
-                                            size: 20
-                                        }}
-                                    />
-                                </td>
-                            </tr>
-                        )
-                    })}
+                    <tbody>
+                        {favorites.map(song => {
+                            return (
+                                <tr key={song.id}>
+                                    <td>
+                                        <img src={song.cover} alt="" />
+                                    </td>
+                                    <td>
+                                        <p><b>{song.name}</b></p>
+                                        <p>Artist: {song.artist}</p>
+                                        <p>Album: {song.title}</p>
+                                        <PlayController
+                                            options={{
+                                                id: song.id,
+                                                preview: song.preview,
+                                                size: 20
+                                            }}
+                                        />
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
                 </table>
             </React.Fragment>
         )
